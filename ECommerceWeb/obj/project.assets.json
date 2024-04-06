@@ -11058,11 +11058,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ProjectNew\\ECommerceWeb\\ECommerceWeb\\ECommerceWeb.csproj",
+      "projectUniqueName": "D:\\ProjectForCV\\ECommerceWeb\\ECommerceWeb\\ECommerceWeb.csproj",
       "projectName": "ECommerceWeb",
-      "projectPath": "D:\\ProjectNew\\ECommerceWeb\\ECommerceWeb\\ECommerceWeb.csproj",
+      "projectPath": "D:\\ProjectForCV\\ECommerceWeb\\ECommerceWeb\\ECommerceWeb.csproj",
       "packagesPath": "C:\\Users\\VIP\\.nuget\\packages\\",
-      "outputPath": "D:\\ProjectNew\\ECommerceWeb\\ECommerceWeb\\obj\\",
+      "outputPath": "D:\\ProjectForCV\\ECommerceWeb\\ECommerceWeb\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\VIP\\AppData\\Roaming\\NuGet\\NuGet.Config",

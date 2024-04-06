@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kZzaBHlowzEndnvK893DYA8NAsSVOB3upKRWjmscE2plCVyNxRXjT7vOJyB+JXA9jTMS/D5zzh+WQq/uUTOMcQ==",
+  "dgSpecHash": "gXl5OTh1M2f7su9NFVoMnYzG8ofhdJfK66Em4Gi+8fMNnQg6CvY35YTBWp/dPdz0xJKgpmKwvpzk8J01vD/yTA==",
   "success": true,
-  "projectFilePath": "D:\\ProjectNew\\ECommerceWeb\\ECommerceWeb\\ECommerceWeb.csproj",
+  "projectFilePath": "D:\\ProjectForCV\\ECommerceWeb\\ECommerceWeb\\ECommerceWeb.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\VIP\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\VIP\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
