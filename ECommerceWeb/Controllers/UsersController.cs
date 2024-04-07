@@ -56,7 +56,7 @@ namespace ECommerceWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Email,Password")] User user)
+        public async Task<IActionResult> Create([Bind("Id,Name,Email,Password, Role")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -76,6 +76,7 @@ namespace ECommerceWeb.Controllers
             }
 
             var user = await _context.User.FindAsync(id);
+           
             if (user == null)
             {
                 return NotFound();
@@ -88,7 +89,7 @@ namespace ECommerceWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email,Password")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email,Password ,Role")] User user)
         {
             if (id != user.Id)
             {
