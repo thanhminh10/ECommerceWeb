@@ -1,5 +1,6 @@
 ﻿using ECommerceWeb.Data;
 using ECommerceWeb.Models;
+using ECommerceWeb.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -16,9 +17,18 @@ namespace ECommerceWeb.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public  IActionResult Index()
         {
-            return View(_context.Product.ToList());
+
+            var viewModel = new ProductCategoryViewModel
+
+            {
+                Products = _context.Product.ToList(),
+                Categories = _context.Category.ToList()
+            };
+
+
+            return View(viewModel);
         }
 
         public IActionResult Privacy()
