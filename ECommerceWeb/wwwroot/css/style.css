@@ -933,6 +933,7 @@ textarea.input {
   font-size: 70%;
   font-weight: 400;
   color: #8D99AE;
+  margin: 0 10px;
 }
 
 .product .product-body .product-rating {

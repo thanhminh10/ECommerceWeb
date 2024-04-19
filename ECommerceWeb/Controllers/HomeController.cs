@@ -1,4 +1,5 @@
-﻿using ECommerceWeb.Models;
+﻿using ECommerceWeb.Data;
+using ECommerceWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,15 +8,17 @@ namespace ECommerceWeb.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ECommerceWebContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger , ECommerceWebContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(_context.Product.ToList());
         }
 
         public IActionResult Privacy()
