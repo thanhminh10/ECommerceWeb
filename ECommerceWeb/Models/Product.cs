@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ECommerceWeb.Models
 {
     public class Product
     {
+        [Key]
         public int Id { get; set; } 
         public string? Name { get; set; }
 
@@ -17,7 +19,7 @@ namespace ECommerceWeb.Models
         public decimal Price { get; set; } 
 
 
-        public int Quantity { get; set; }
+        public int? Quantity { get; set; }
 
 
         [ForeignKey("Category")]
@@ -27,5 +29,7 @@ namespace ECommerceWeb.Models
         public virtual Category? Category { get; set; }
 
 
+       
+    
     }
 }

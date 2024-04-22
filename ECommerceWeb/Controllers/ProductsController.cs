@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ECommerceWeb.Data;
 using ECommerceWeb.Models;
+using ECommerceWeb.ViewModels;
 
 namespace ECommerceWeb.Controllers
 {
@@ -22,8 +23,20 @@ namespace ECommerceWeb.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var eCommerceWebContext = _context.Product.Include(p => p.Category);
-            return View(await eCommerceWebContext.ToListAsync());
+          
+            var viewModel = new ProductCategoryViewModel
+
+            {
+                Products = _context.Product.ToList(),
+                Categories = _context.Category.ToList()
+            };
+            // Calculate the number of products for each category
+            foreach (var category in viewModel.Categories)
+            {
+                category.ProductCount = viewModel.Products.Count(p => p.CategoryId == category.Id);
+            }
+
+            return View(viewModel);
         }
 
         // GET: Products/Details/5
