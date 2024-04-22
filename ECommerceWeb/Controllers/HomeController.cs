@@ -2,6 +2,7 @@
 using ECommerceWeb.Models;
 using ECommerceWeb.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace ECommerceWeb.Controllers
@@ -17,17 +18,14 @@ namespace ECommerceWeb.Controllers
             _context = context;
         }
 
-        public  IActionResult Index()
+        public async Task<IActionResult> Index()
         {
 
-            var viewModel = new ProductCategoryViewModel
+            ProductCategoryViewModel viewModel = new ProductCategoryViewModel();
+          
 
-            {
-                Products = _context.Product.ToList(),
-                Categories = _context.Category.ToList()
-            };
-
-
+            viewModel.Categories = await _context.Category.ToListAsync();
+     
             return View(viewModel);
         }
 

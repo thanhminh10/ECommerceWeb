@@ -29,10 +29,6 @@ namespace ECommerceWeb.Models
         public virtual Category? Category { get; set; }
 
 
-        [ForeignKey("Brand")]
-        public int BrandId { get; set; }
-
-
-        public virtual Brand? Brand { get; set; }
+      
     }
 }
