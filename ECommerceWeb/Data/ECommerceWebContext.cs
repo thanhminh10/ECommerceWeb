@@ -19,7 +19,6 @@ namespace ECommerceWeb.Data
         public DbSet<ECommerceWeb.Models.Product>? Product { get; set; }
 
         public DbSet<ECommerceWeb.Models.User>? User { get; set; }
-
-       
+        public DbSet<ECommerceWeb.Models.Brand>? Brand { get; set; }
     }
 }

@@ -4,7 +4,7 @@ namespace ECommerceWeb.ViewModels
 {
     public class ProductCategoryViewModel
     {
-        public List<Product> Products { get; set; }
-        public List<Category> Categories { get; set; }
+        public  List<ECommerceWeb.Models.Product>? Products { get; set; }
+        public  List<ECommerceWeb.Models.Category>? Categories { get; set; }
     }
 }
