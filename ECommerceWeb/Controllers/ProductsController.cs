@@ -50,12 +50,13 @@ namespace ECommerceWeb.Controllers
 
             var product = await _context.Product
                 .Include(p => p.Category)
+                .Include(p => p.Brand)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {
                 return NotFound();
             }
-
+            
             return View(product);
         }
 
@@ -124,51 +125,79 @@ namespace ECommerceWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,ImageURL,Price,Quantity,CategoryId ,BrandId")] Product product , IFormFile ImageURL)
+        public async Task<IActionResult> Edit(int id, Product product, IFormFile ImageURL)
         {
-            
-
             if (id != product.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            // Set ModelState.IsValid to true to bypass validation
+            ModelState.Clear();
 
+            try
             {
-                try
+                // Retrieve the existing product from the database
+                var existingProduct = await _context.Product.FindAsync(id);
+                if (existingProduct == null)
                 {
-                    if (ImageURL != null && ImageURL.Length > 0)
-                    {
-                        var filePath = Path.Combine("wwwroot", "assets", "product_img", ImageURL.FileName);
-                        using (var stream = new FileStream(filePath, FileMode.Create))
-                        {
-                            await ImageURL.CopyToAsync(stream);
-                        }
-                        product.ImageURL = $"/assets/product_img/{ImageURL.FileName}";
-                    }
-                    
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
-                    // Redirect to index action after successful update
-                    return RedirectToAction("Index", "Products");
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+
+                // Update properties from the incoming product if they are not null
+                if (product.Name != null)
                 {
-                    if (!ProductExists(product.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    existingProduct.Name = product.Name;
                 }
-                
+                if (product.Description != null)
+                {
+                    existingProduct.Description = product.Description;
+                }
+                if (product.Price != 0)
+                {
+                    existingProduct.Price = product.Price;
+                }
+                if (product.Quantity.HasValue)
+                {
+                    existingProduct.Quantity = product.Quantity;
+                }
+                if (product.CategoryId != 0)
+                {
+                    existingProduct.CategoryId = product.CategoryId;
+                }
+                if (product.BrandId.HasValue)
+                {
+                    existingProduct.BrandId = product.BrandId;
+                }
+
+                // Update ImageURL if provided
+                if (ImageURL != null && ImageURL.Length > 0)
+                {
+                    var filePath = Path.Combine("wwwroot", "assets", "product_img", ImageURL.FileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await ImageURL.CopyToAsync(stream);
+                    }
+                    existingProduct.ImageURL = $"/assets/product_img/{ImageURL.FileName}";
+                }
+
+                // Update the existing product in the database
+                _context.Update(existingProduct);
+                await _context.SaveChangesAsync();
+
+                return Json(new { success = true, message = "Product updated successfully.", productId = existingProduct.Id });
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Id", product.CategoryId);
-            
-            return View(product);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProductExists(product.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
 
         // GET: Products/Delete/5

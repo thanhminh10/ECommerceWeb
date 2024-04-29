@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Edit";
+    Layout = "_Products";
 }
 
 <h1>Edit</h1>
@@ -10,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        <form asp-action="Edit" id="EditProduct" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group mb-3">
@@ -26,13 +27,16 @@
 
 
             <div class="form-group mb-3">
-                <label asp-for="ImageURL" class="control-label"></label>
-                <input  class="form-control" type="file" name="ImageURL" id="imageFile" onchange="previewImage(event)" accept="image/*"/>
+                <label for="image">Choose Image:</label>
+                <input class="form-control" type="file" name="ImageURL" id="imageFile" onchange="previewImage(event)" accept="image/*" />
+
+
+
                 @if (!string.IsNullOrEmpty(Model.ImageURL))
                 {
                     <img id="imagePreview" src="@Url.Content(Model.ImageURL)" style="max-width: 200px; max-height: 200px;" />
                 }
-                <span asp-validation-for="ImageURL" class="text-danger"></span>
+
 
                 <!-- Allow admin to uplo" type=ad a new image -->
 
@@ -63,7 +67,7 @@
             </div>
 
             <div class="form-group mb-3">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="button" value="Save" id="editForm" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -77,8 +81,37 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 
-
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script>
+
+    $(document).ready(function () {
+        $('#editForm').on('click', function (e) {
+            e.preventDefault(); // Prevent default form submission
+
+            // Serialize form data
+            var formData = new FormData($('#EditProduct')[0]);
+
+            // Make AJAX request
+            $.ajax({
+                url: $('#EditProduct').attr('action'),
+                type: $('#EditProduct').attr('method'),
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    if (response.success) {
+                        // Display success message
+                        window.location.href = '/Products/Details/' + response.productId;
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Handle error
+                    console.error(error);
+                }
+            });
+        });
+    });
+
     function previewImage(event) {
         var input = event.target;
         var reader = new FileReader();
@@ -91,9 +124,10 @@
     }
 
     document.addEventListener("DOMContentLoaded", function () {
-          var imageUrl = '@ViewData["ImageURL"]'; // Retrieve image URL from ViewBag
-            if (imageUrl) {
-                document.getElementById("imageFile").src = imageUrl;
-            }
-     });
+        var imageUrl = '@ViewData["ImageURL"]'; // Retrieve image URL from ViewBag
+        if (imageUrl) {
+            document.getElementById("imageFile").src = imageUrl;
+        }
+    });
 </script>
+
