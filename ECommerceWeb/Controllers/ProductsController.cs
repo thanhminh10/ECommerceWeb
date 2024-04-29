@@ -29,13 +29,24 @@ namespace ECommerceWeb.Controllers
 
             {
                 Products = _context.Product.ToList(),
-                Categories = _context.Category.ToList()
+                Categories = _context.Category.ToList(),
+               
             };
+
+           
+
             // Calculate the number of products for each category
             foreach (var category in viewModel.Categories)
             {
                 category.ProductCount = viewModel.Products.Count(p => p.CategoryId == category.Id);
             }
+
+            foreach (var brand in _context.Brand)
+            {
+                brand.ProductCount = viewModel.Products.Count(p => p.BrandId == brand.Id);
+            }
+
+            ViewData["Brand"] = _context.Brand.ToList();
 
             return View(viewModel);
         }
