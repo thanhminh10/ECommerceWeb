@@ -108,7 +108,48 @@ namespace ECommerceWeb.Controllers
             return View(product);
         }
 
-       
+
+        [HttpPost("{id}/upload-images")]
+        public async Task<IActionResult> UploadImages(int id, [FromForm] IFormFile image1, [FromForm] IFormFile image2)
+        {
+            var product = await _context.Product.FindAsync(id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            if (image1 == null || image2 == null)
+            {
+                return BadRequest("Please provide two images to upload.");
+            }
+
+            string uploadsFolder = Path.Combine("wwwroot", "assets", "product_img");
+            string uniqueFileName1 = Guid.NewGuid().ToString() + "_" + image1.FileName;
+            string filePath1 = Path.Combine(uploadsFolder, uniqueFileName1);
+
+            string uniqueFileName2 = Guid.NewGuid().ToString() + "_" + image2.FileName;
+            string filePath2 = Path.Combine(uploadsFolder, uniqueFileName2);
+
+            using (var stream1 = new FileStream(filePath1, FileMode.Create))
+            {
+                await image1.CopyToAsync(stream1);
+            }
+
+            using (var stream2 = new FileStream(filePath2, FileMode.Create))
+            {
+                await image2.CopyToAsync(stream2);
+            }
+
+            product.ImageURL_02 = uniqueFileName1;
+            product.ImageURL_03 = uniqueFileName2;
+
+            _context.SaveChanges();
+
+            return Ok(new { message = "Images uploaded successfully." });
+        }
+
+
 
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)

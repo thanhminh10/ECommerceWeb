@@ -15,6 +15,10 @@ namespace ECommerceWeb.Models
         public string? ImageURL { get; set; }
 
 
+        public string? ImageURL_02 { get; set; }
+
+        public string? ImageURL_03 { get; set; }
+
         [Column(TypeName = "decimal(18,4)")]
         public decimal Price { get; set; } 
 
