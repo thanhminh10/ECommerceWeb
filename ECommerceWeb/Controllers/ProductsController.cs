@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ECommerceWeb.Data;
 using ECommerceWeb.Models;
 using ECommerceWeb.ViewModels;
+using Newtonsoft.Json;
 
 namespace ECommerceWeb.Controllers
 {
@@ -61,7 +62,9 @@ namespace ECommerceWeb.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name");
+         
+            ViewData["CategoryName"] = new SelectList(_context.Category, "Id", "Name");
+            ViewData["BrandName"] = new SelectList(_context.Brand, "Id", "Name");
             return View();
         }
 
@@ -70,7 +73,7 @@ namespace ECommerceWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,	ImageURL,Price,Quantity,CategoryId")] Product product, IFormFile ImageURL)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,	ImageURL,Price,Quantity,CategoryId,BrandId")] Product product, IFormFile ImageURL)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +92,7 @@ namespace ECommerceWeb.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Id", product.CategoryId);
+            
             return View(product);
         }
 
@@ -98,6 +101,7 @@ namespace ECommerceWeb.Controllers
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+ 
             if (id == null || _context.Product == null)
             {
                 return NotFound();
@@ -109,6 +113,9 @@ namespace ECommerceWeb.Controllers
                 return NotFound();
             }
             ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Id", product.CategoryId);
+            ViewData["CategoryName"] = new SelectList(_context.Category, "Id", "Name",product.CategoryId);
+            ViewData["BrandName"] = new SelectList(_context.Brand, "Id", "Name", product.BrandId);
+           
             return View(product);
         }
 
@@ -117,8 +124,10 @@ namespace ECommerceWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,ImageURL,Price,Quantity,CategoryId")] Product product , IFormFile ImageURL)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,ImageURL,Price,Quantity,CategoryId ,BrandId")] Product product , IFormFile ImageURL)
         {
+            
+
             if (id != product.Id)
             {
                 return NotFound();
@@ -138,8 +147,11 @@ namespace ECommerceWeb.Controllers
                         }
                         product.ImageURL = $"/assets/product_img/{ImageURL.FileName}";
                     }
+                    
                     _context.Update(product);
                     await _context.SaveChangesAsync();
+                    // Redirect to index action after successful update
+                    return RedirectToAction("Index", "Products");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -152,9 +164,10 @@ namespace ECommerceWeb.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                
             }
             ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Id", product.CategoryId);
+            
             return View(product);
         }
 

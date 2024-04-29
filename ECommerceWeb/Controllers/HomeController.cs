@@ -22,8 +22,8 @@ namespace ECommerceWeb.Controllers
         {
 
             ProductCategoryViewModel viewModel = new ProductCategoryViewModel();
-          
 
+            viewModel.Products = await _context.Product.ToListAsync();
             viewModel.Categories = await _context.Category.ToListAsync();
      
             return View(viewModel);
