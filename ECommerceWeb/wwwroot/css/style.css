@@ -812,9 +812,10 @@ textarea.input {
 
 .product .product-img {
   position: relative;
+  display:block;
 }
 
-.product .product-img>img {
+.product .product-img img {
   width: 100%;
 }
 
@@ -2083,6 +2084,31 @@ textarea.input {
 .custom-dots .slick-dots {
   position: static;
   margin: 15px 0px;
+}
+/* CSS used here will be applied after bootstrap.css */
+.carousel {
+    margin-top: 20px;
+}
+
+.item .thumb {
+    width: 30%;
+    cursor: pointer;
+    float: left;
+}
+
+.item .thumb img {
+   width: 100%;
+   margin: 2px;
+}
+
+.carousel-inner > .item.active, .carousel-inner > .item.next.left, .carousel-inner > .item.prev.right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item img {
+    width: 100%;
 }
 
 /*=========================================================

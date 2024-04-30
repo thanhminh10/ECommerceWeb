@@ -109,7 +109,7 @@ namespace ECommerceWeb.Controllers
         }
 
 
-        [HttpPost("{id}/upload-images")]
+        [HttpPost]
         public async Task<IActionResult> UploadImages(int id, [FromForm] IFormFile image1, [FromForm] IFormFile image2)
         {
             var product = await _context.Product.FindAsync(id);
@@ -141,8 +141,8 @@ namespace ECommerceWeb.Controllers
                 await image2.CopyToAsync(stream2);
             }
 
-            product.ImageURL_02 = uniqueFileName1;
-            product.ImageURL_03 = uniqueFileName2;
+            product.ImageURL_02 = $"/assets/product_img/{uniqueFileName1}";
+            product.ImageURL_03 = $"/assets/product_img/{uniqueFileName2}";
 
             _context.SaveChanges();
 

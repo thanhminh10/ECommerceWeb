@@ -38,5 +38,12 @@ namespace ECommerceWeb.Models
 
 
         public virtual Brand? Brand { get; set; }
+
+
+        [ForeignKey("Color")]
+        public int? ColorId { get; set; }
+
+
+        public virtual Color? Color { get; set; }
     }
 }
