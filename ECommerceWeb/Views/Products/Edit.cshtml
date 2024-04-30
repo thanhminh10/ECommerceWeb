@@ -54,6 +54,12 @@
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
 
+
+            <div class="form-group mb-3">
+                <label asp-for="ColorId" class="control-label"></label>
+                <select asp-for="ColorId" class="form-control" asp-items="ViewBag.ColorName"></select>
+            </div>
+
             <div class="form-group mb-3">
                 <label asp-for="CategoryId" class="control-label"></label>
                 <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryName"></select>
@@ -74,10 +80,18 @@
             <div class="form-group">
                 <label for="image1">Image 02:</label>
                 <input type="file" class="form-control" name="image1">
+                @if (!string.IsNullOrEmpty(Model.ImageURL_02))
+                {
+                    <img id="imagePreview" src="@Url.Content(Model.ImageURL_02)" style="max-width: 200px; max-height: 200px;" />
+                }
             </div>
             <div class="form-group">
                 <label for="image2">Image 03:</label>
                 <input type="file" class="form-control" name="image2">
+                @if (!string.IsNullOrEmpty(Model.ImageURL_03))
+                {
+                    <img id="imagePreview" src="@Url.Content(Model.ImageURL_03)" style="max-width: 200px; max-height: 200px;" />
+                }
             </div>
             <button type="submit" class="btn btn-primary">Upload Images</button>
         </form>

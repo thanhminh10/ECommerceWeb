@@ -23,5 +23,8 @@ namespace ECommerceWeb.Data
 
         public DbSet<ECommerceWeb.Models.Brand>? Brand { get; set; }
 
+
+        public DbSet<ECommerceWeb.Models.Color>? Color { get; set; }
+
     }
 }

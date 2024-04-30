@@ -77,6 +77,7 @@ namespace ECommerceWeb.Controllers
          
             ViewData["CategoryName"] = new SelectList(_context.Category, "Id", "Name");
             ViewData["BrandName"] = new SelectList(_context.Brand, "Id", "Name");
+            ViewData["ColorName"] = new SelectList(_context.Color, "Id", "Name");
             return View();
         }
 
@@ -119,30 +120,42 @@ namespace ECommerceWeb.Controllers
                 return NotFound();
             }
 
-            if (image1 == null || image2 == null)
+            if (image1 == null && image2 == null)
             {
                 return BadRequest("Please provide two images to upload.");
             }
 
-            string uploadsFolder = Path.Combine("wwwroot", "assets", "product_img");
-            string uniqueFileName1 = Guid.NewGuid().ToString() + "_" + image1.FileName;
-            string filePath1 = Path.Combine(uploadsFolder, uniqueFileName1);
-
-            string uniqueFileName2 = Guid.NewGuid().ToString() + "_" + image2.FileName;
-            string filePath2 = Path.Combine(uploadsFolder, uniqueFileName2);
-
-            using (var stream1 = new FileStream(filePath1, FileMode.Create))
+             string uploadsFolder = Path.Combine("wwwroot", "assets", "product_img");
+            if (image1 != null)
             {
-                await image1.CopyToAsync(stream1);
+                string uniqueFileName1 = Guid.NewGuid().ToString() + "_" + image1.FileName;
+                string filePath1 = Path.Combine(uploadsFolder, uniqueFileName1);
+                using (var stream1 = new FileStream(filePath1, FileMode.Create))
+                {
+                    await image1.CopyToAsync(stream1);
+                }
+                product.ImageURL_02 = $"/assets/product_img/{uniqueFileName1}";
             }
 
-            using (var stream2 = new FileStream(filePath2, FileMode.Create))
+
+            if (image2 != null)
             {
-                await image2.CopyToAsync(stream2);
+                string uniqueFileName2 = Guid.NewGuid().ToString() + "_" + image2.FileName;
+                string filePath2 = Path.Combine(uploadsFolder, uniqueFileName2);
+
+
+
+                using (var stream2 = new FileStream(filePath2, FileMode.Create))
+                {
+                    await image2.CopyToAsync(stream2);
+                }
+                product.ImageURL_03 = $"/assets/product_img/{uniqueFileName2}";
             }
 
-            product.ImageURL_02 = $"/assets/product_img/{uniqueFileName1}";
-            product.ImageURL_03 = $"/assets/product_img/{uniqueFileName2}";
+           
+
+          
+          
 
             _context.SaveChanges();
 
@@ -168,7 +181,8 @@ namespace ECommerceWeb.Controllers
             ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Id", product.CategoryId);
             ViewData["CategoryName"] = new SelectList(_context.Category, "Id", "Name",product.CategoryId);
             ViewData["BrandName"] = new SelectList(_context.Brand, "Id", "Name", product.BrandId);
-           
+            ViewData["ColorName"] = new SelectList(_context.Color, "Id", "Name", product.BrandId);
+
             return View(product);
         }
 
