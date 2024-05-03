@@ -25,6 +25,6 @@ namespace ECommerceWeb.Data
 
 
         public DbSet<ECommerceWeb.Models.Color>? Color { get; set; }
-
+        public object Users { get; internal set; }
     }
 }

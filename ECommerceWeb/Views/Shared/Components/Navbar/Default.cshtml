@@ -3,25 +3,33 @@
 *@
 @{
 }
-<nav id="navigation">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="navigation">
     <!-- container -->
     <div class="container">
         <!-- responsive-nav -->
         <div id="responsive-nav">
-            <!-- NAV -->
-            <ul class="main-nav nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="/Products">Product</a></li>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
 
-                <li><a href="/Categories">Categories</a></li>
+                    <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "active" : "")">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString() == "Products" ? "active" : "")">
+                        <a class="nav-link" href="/Products">Product</a>
+                    </li>
 
-                @foreach (var item in Model)
-                {
-                    <li><a href="#">@item.Name</a></li>
-                }
+                    <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString() == "Categories" ? "active" : "")">
+                        <a class="nav-link" href="/Categories">Categories</a>
+                    </li>
 
-            </ul>
-            <!-- /NAV -->
+
+                    @foreach (var item in Model)
+                    {
+                        <li class="nav-item"><a class="nav-link" href="#">@item.Name</a></li>
+                    }
+
+                </ul>
+            </div>
         </div>
         <!-- /responsive-nav -->
     </div>

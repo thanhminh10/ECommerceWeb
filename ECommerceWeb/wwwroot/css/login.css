@@ -1,0 +1,41 @@
+﻿.register-form {
+    margin: 10px 0;
+    padding:20px;
+}
+
+
+
+.register-form a {
+    color: #333;
+}
+
+.register-form a:hover {
+    color: #da5767;
+    text-decoration: none;
+}
+
+
+.register-form .form-control {
+        background-color: #f8f9fa;
+        padding: 20px;
+        padding: 10px 10px;
+        margin-bottom: 1.3rem;
+}
+
+.register-form .form-control:focus {
+        color: #000000;
+        background-color: #ffffff;
+        outline: 0;
+        box-shadow: none;
+ }
+
+.register-form  .btn {
+        padding: 0.6rem 1.2rem;
+        background: #da5767;
+        border: 2px solid #da5767;
+}
+.register-form .btn-primary:hover {
+        background-color: #df8c96;
+        border-color: #df8c96;
+        transition: .3s;
+}

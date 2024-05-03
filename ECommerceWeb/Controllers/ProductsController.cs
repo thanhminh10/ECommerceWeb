@@ -51,6 +51,48 @@ namespace ECommerceWeb.Controllers
             return View(viewModel);
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> Index(int catId, string keywords)
+        {
+           
+
+            var products = await _context.Product
+                .Where(p => p.CategoryId == catId || p.Name.Contains(keywords) || p.Description.Contains(keywords)).ToListAsync();
+
+            // Retrieve all categories
+            var categories = await _context.Category.ToListAsync();
+
+
+            var viewModel = new ProductCategoryViewModel
+
+            {
+                Products = products,
+                Categories = categories,
+            };
+
+
+            // Calculate the number of products for each category
+            foreach (var category in viewModel.Categories)
+            {
+                category.ProductCount = viewModel.Products.Count(p => p.CategoryId == category.Id);
+            }
+
+            foreach (var brand in _context.Brand)
+            {
+                brand.ProductCount = viewModel.Products.Count(p => p.BrandId == brand.Id);
+            }
+            // Pass keywords to the view
+            ViewData["Cate_Search"] = catId;
+
+            // Pass keywords to the view
+            ViewData["Keywords"] = keywords;
+
+            ViewData["Brand"] = _context.Brand.ToList();
+
+            return View(viewModel);
+        }
+
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {

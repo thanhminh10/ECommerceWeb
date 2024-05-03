@@ -9,8 +9,7 @@ html {
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
 }
 
 body {
@@ -39,6 +38,11 @@ body {
 .btn:focus {
     outline: none !important;
     box-shadow: none !important;
+}
+
+.header-search {
+    padding: 15px 0px;
+    position: relative;
 }
 
 
