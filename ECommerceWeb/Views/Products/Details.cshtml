@@ -12,39 +12,63 @@
         <!-- row -->
         <div class="row">
             <!-- Product main img -->
-               <div class="col-md-5">
-                    <div id="carousel" class="carousel slide" data-interval="3000" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <img src="@Model.ImageURL">
-                            </div>
-                            <div class="item">
-                                <img src="@Model.ImageURL_02">
-                            </div>
-                            <div class="item">
-                                <img src="@Model.ImageURL_03">
-                            </div>
-                          
+            <!-- <div class="col-md-5">
+         <div id="carousel" class="carousel slide" data-interval="3000" data-ride="carousel">
+             <div class="carousel-inner">
+                 <div class="item active">
+                     <img src="@Model.ImageURL">
+                 </div>
+                 <div class="item">
+                     <img src="@Model.ImageURL_02">
+                 </div>
+                 <div class="item">
+                     <img src="@Model.ImageURL_03">
+                 </div>
+
+             </div>
+         </div>
+         <div class="clearfix">
+             <div id="thumbcarousel" class="carousel slide" data-interval="12000" data-ride="carousel">
+                 <div class="carousel-inner">
+                     <div class="item active">
+                         <div data-target="#carousel" data-slide-to="0" class="thumb"><img src="@Model.ImageURL"></div>
+                         <div data-target="#carousel" data-slide-to="1" class="thumb"><img src="@Model.ImageURL_02"></div>
+                         <div data-target="#carousel" data-slide-to="2" class="thumb"><img src="@Model.ImageURL_03"></div>
+
+                     </div>
+
+                 </div>
+
+             </div>
+         </div>
+     </div>
+     -->
+            <div class="col-md-5">
+                <div class="img_thums">
+                    <div class="swiper-container swiper-container-top">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="@Model.ImageURL" alt="Image 1"></div>
+                            <div class="swiper-slide"><img src="@Model.ImageURL_02" alt="Image 2"></div>
+                            <div class="swiper-slide"><img src="@Model.ImageURL_03" alt="Image 3"></div>
+                            <!-- Add more images here -->
                         </div>
+                        <div class="swiper-pagination"></div>
+
                     </div>
-                    <div class="clearfix">
-                        <div id="thumbcarousel" class="carousel slide" data-interval="12000" data-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <div data-target="#carousel" data-slide-to="0" class="thumb"><img src="@Model.ImageURL"></div>
-                                    <div data-target="#carousel" data-slide-to="1" class="thumb"><img src="@Model.ImageURL_02"></div>
-                                    <div data-target="#carousel" data-slide-to="2" class="thumb"><img src="@Model.ImageURL_03"></div>
-                                    
-                                </div>
-                               
-                            </div>
-                            
+                    <div class="swiper-container swiper-container-thumbs">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="@Model.ImageURL" alt="Image 1"></div>
+                            <div class="swiper-slide"><img src="@Model.ImageURL_02" alt="Image 2"></div>
+                            <div class="swiper-slide"><img src="@Model.ImageURL_03" alt="Image 3"></div>
+                            <!-- Add more images here -->
                         </div>
+                        <div class="swiper-pagination"></div>
+
                     </div>
                 </div>
 
+            </div>
             <!-- /Product main img -->
-            
             <!-- Product details -->
             <div class="col-md-5">
                 <div class="product-details">
