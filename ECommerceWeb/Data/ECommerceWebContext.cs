@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ECommerceWeb.Models;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.General;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace ECommerceWeb.Data
 {
-    public class ECommerceWebContext : DbContext
+    public class ECommerceWebContext : IdentityDbContext<ApplicationUser> // Update inheritance
     {
         public ECommerceWebContext (DbContextOptions<ECommerceWebContext> options)
             : base(options)
@@ -24,4 +26,6 @@ namespace ECommerceWeb.Data
         public DbSet<ECommerceWeb.Models.Color>? Color { get; set; }
        
     }
+
+
 }
