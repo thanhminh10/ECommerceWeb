@@ -546,9 +546,10 @@ D:\ProjectForCV\ECommerceWeb\ECommerceWeb\obj\Debug\net6.0\staticwebassets.devel
 D:\ProjectForCV\ECommerceWeb\ECommerceWeb\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 D:\ProjectForCV\ECommerceWeb\ECommerceWeb\obj\Debug\net6.0\scopedcss\bundle\ECommerceWeb.styles.css
 D:\ProjectForCV\ECommerceWeb\ECommerceWeb\obj\Debug\net6.0\scopedcss\projectbundle\ECommerceWeb.bundle.scp.css
-D:\ProjectForCV\ECommerceWeb\ECommerceWeb\obj\Debug\net6.0\ECommerceWeb.csproj.CopyComplete
 D:\ProjectForCV\ECommerceWeb\ECommerceWeb\obj\Debug\net6.0\ECommerceWeb.dll
 D:\ProjectForCV\ECommerceWeb\ECommerceWeb\obj\Debug\net6.0\refint\ECommerceWeb.dll
 D:\ProjectForCV\ECommerceWeb\ECommerceWeb\obj\Debug\net6.0\ECommerceWeb.pdb
 D:\ProjectForCV\ECommerceWeb\ECommerceWeb\obj\Debug\net6.0\ECommerceWeb.genruntimeconfig.cache
 D:\ProjectForCV\ECommerceWeb\ECommerceWeb\obj\Debug\net6.0\ref\ECommerceWeb.dll
+D:\ProjectForCV\ECommerceWeb\ECommerceWeb\obj\Debug\net6.0\ECommerceWeb.sourcelink.json
+D:\ProjectForCV\ECommerceWeb\ECommerceWeb\obj\Debug\net6.0\ECommerc.69DC9E56.Up2Date

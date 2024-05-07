@@ -1,0 +1,27 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="header-search">
+    <form asp-controller="Products" asp-action="Index" >
+        <select class="input-select" name="catId" value>
+            <option value="">All Categories</option>
+            @foreach (var item in Model)
+            {
+                if (item.Id == ViewBag.Cate_Search)
+                {
+                    <option value="@item.Id" selected>@item.Name</option>
+                }
+                else
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            }
+        </select>
+        <input class="input" name="keywords" placeholder="Search here" value="@ViewBag.Keywords">
+        <button class="search-btn">Search</button>
+    </form>
+</div>
+
